@@ -21,10 +21,19 @@ const PORT = 4000; // 5000 // 3000
 // HOW DO WE KNOW
 // IF THE SERVER RUNS? 🤔
 
-// .listen() function => 2 params => .listen(port, func)
-
 // DRY principle = Don't Repeat Yourself
 
+// HTTP
+// GET, POST, PUT/PATCH (Updates), DELETE
+
+// GET HTTP "/"
+// .get() => 2 params => .get(relative-address, func())
+// func(request, response)
+server.get("/", (reuqest, response) => {
+  response.send("Welcome to my server!");
+});
+
+// .listen() function => 2 params => .listen(port, func)
 server.listen(PORT, () => {
   console.log(`Express server is running on port ${PORT}`);
 });
