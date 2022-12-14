@@ -1,22 +1,16 @@
 import express from "express";
+// import { router } from "../routes/characters";
+import { characterRouter } from "./routes/characters.js";
 
 const app = express();
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  console.log("log");
+  res.send("welcome to character serve");
+});
+app.use("/characters", characterRouter);
+
 const PORT = 5000;
-
-app.get("/", (request, response) => {
-  console.log("get /");
-
-  response.status(200).send({
-    name: "david",
-    age: 35,
-  });
-});
-
-app.post("/", (req, res) => {
-  console.log(req.body);
-  res.status(200).send("Request has been made");
-});
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
