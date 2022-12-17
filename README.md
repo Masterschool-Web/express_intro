@@ -75,6 +75,10 @@ We should send back this object
 }
 ```
 
+### 9. Add a UI
+
+Using React, add a UI and use `fetch("http://localhost:5000/characters/...)"` to fetch data using your server endpoints! 
+
 ## Steps and Tips
 
 ### 1. Setup an express server
