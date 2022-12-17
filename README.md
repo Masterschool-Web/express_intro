@@ -47,7 +47,15 @@ if no character was found, return status 404 with a message "no character was fo
 
 if no character was found, return status 404 with a message "no character was found"
 
-### 7. Get Ready, Match!
+### 7. Get characters by search queries
+
+- Navigating to `localhost:5000/characters/search` should listen to any query attached
+- A query looks like this `localhost:5000/characters/search?name=harry`
+- Multiple queries look like this `localhost:5000/characters/search?name=harry&house=griffindor`
+
+You should return a list of all characters where the query matches something - whether it's name, patronus, anything. You may wish to consider how you order results in a way that's meaningful (sort a-z, according to the search queries).
+
+### 8. Get Ready, Match!
 
 We are playing Quidditch, the famous wizard game from the Harry Potter books.
 
@@ -115,3 +123,17 @@ use `toLowerCase()` to make sure the case you got in the `params` does not matte
 ### 6. Get all characters by month of birth
 
 That is a hard one... because every birth date is different in the Database, we should use something like `.index()` or `.includes()`
+
+### 7. Get characters by search queries
+
+To read a query we use `req.query`.
+
+For example:
+```js
+
+const { name, house } = req.query
+
+if (name) {
+  // filter characters by name...
+}
+```
