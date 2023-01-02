@@ -17,6 +17,25 @@ export function getByName(name) {
     return characters.filter((c) => c.name.toLowerCase().includes(name.toLowerCase()))
 }
 
+export function getByQuery(params) {
+    console.log(params)
+    let result = []
+    for (let character of characters) {
+        for (let param in params) {
+            console.log(params[param])
+            if (Number.isInteger(character[param]) && (character[param] === parseInt(params[param]))) {
+                result.push(character)
+            } else if (!Number.isInteger(character[param]) && character[param].toLowerCase().includes(params[param].toLowerCase())) {
+                result.push(character)
+            }
+            else {
+                continue;
+            }
+        }
+    }
+    return result;
+}
+
 export function getMatches() {
     const chunks = chunk(shuffle(characters), 6)
     console.log(chunks.length)

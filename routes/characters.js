@@ -1,12 +1,12 @@
 import express from "express";
 const router = express.Router();
-import {getAll, getByBirthMonth, getByBloodType, getById, getMatches, getByName} from "../models/characters.js";
+import {getAll, getByBirthMonth, getByBloodType, getById, getMatches, getByName, getByQuery} from "../models/characters.js";
 
 router.get("/", (req, res) => {
     res.send(getAll());
 });
 
-router.get("/queryPath", (req, res) => {
+router.get("/search", (req, res) => {
     console.log(req.query)
     if(!req.query) {
         return res.status(400).send("Oops...Didn't see that one coming");
@@ -24,6 +24,18 @@ router.get("/queryPath", (req, res) => {
     } else {
         result = null
     }
+    if (!result){
+        return res.status(400).send("Oops...Didn't see that one coming");
+    }
+    res.send(result);
+});
+
+router.get("/compoundSearch", (req, res) => {
+    console.log(req.query)
+    if(!req.query) {
+        return res.status(400).send("Oops...Didn't see that one coming");
+    }
+    const result = getByQuery(req.query)
     if (!result){
         return res.status(400).send("Oops...Didn't see that one coming");
     }
