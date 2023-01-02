@@ -1,10 +1,35 @@
 import express from "express";
 const router = express.Router();
-import {getAll, getByBirthMonth, getByBloodType, getById, getMatches} from "../models/characters.js";
+import {getAll, getByBirthMonth, getByBloodType, getById, getMatches, getByName} from "../models/characters.js";
 
 router.get("/", (req, res) => {
     res.send(getAll());
 });
+
+router.get("/queryPath", (req, res) => {
+    console.log(req.query)
+    if(!req.query) {
+        return res.status(400).send("Oops...Didn't see that one coming");
+    }
+
+    let result;
+    if (req.query.id) {
+        result = getById(req.query.id)
+    } else if (req.query.name) {
+        result = getByName(req.query.name)
+    }  else if (req.query.birth) {
+        result = getByBirthMonth(req.query.birth)
+    } else if (req.query.blood) {
+        result = getByBloodType(req.query.blood)
+    } else {
+        result = null
+    }
+    if (!result){
+        return res.status(400).send("Oops...Didn't see that one coming");
+    }
+    res.send(result);
+});
+
 router.get("/match", (req, res) => {
     const result = getMatches()
     res.send(result);
@@ -44,5 +69,6 @@ router.get("/blood-type/:type", (req, res) => {
     }
     res.send(result);
 });
+
 
 export { router as characterRouter };

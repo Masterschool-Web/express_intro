@@ -13,6 +13,9 @@ export function getByBirthMonth(month) {
 export function getByBloodType(bloodType) {
     return characters.filter((c) => c.blood.toLowerCase().includes(bloodType.toLowerCase()))
 }
+export function getByName(name) {
+    return characters.filter((c) => c.name.toLowerCase().includes(name.toLowerCase()))
+}
 
 export function getMatches() {
     const chunks = chunk(shuffle(characters), 6)
